@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title>Donut Clicker</title>
+<style>
+
+body {
+	background-image: url("Donut Background.jpg");
+	background-size: 250px;
+}
+
+hgroup {
+	background-color: #FFF;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+h2 {
+	background-color: #FFF;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+</style>
+</head>
+<hgroup>
+<h1>Donut Clicker!</h1>
+<p>Welcome to the donut clicker! In this game you click the "Bake a donut" <br>button to bake a donut and sell it for money!
+ You can buy Bakers to <br>slowly help you bake more donuts, or buy a new stove so YOU can make <br>more donuts! Become the biggest 
+donut shop in the nation!Can you earn 1 <br>million dollars? Well, what are you waiting for? 
+START BAKING!!!</p>
+<h2 id="donuts"></h2>
+<h4 id="donutsPS"></h4>
+<h4 id="donutsPC"></h4>
+<h3 id="PrestigeNum"></h3>
+</hgroup>
+<br>
+<br>
+<img src="C:\Users\Apollo Foard\Documents\Donut Icon.jpg" width= "170" button type="button" onClick="gainDonuts()">
+<body onload="load()">
+<script>
+var donuts = 0;
+var donutsPS = 0;
+var donutsPC = 1;
+var PrestigeNum = 0;
+var donuts2 = 10000;
+
+function gainDonuts() {
+donuts += donutsPC;
+save();
+}
+
+setInterval(function renderDonuts() {
+document.getElementById("donuts").innerHTML = "Money: " + donuts;
+})
+setInterval(function renderDonutsPS() {
+document.getElementById("donutsPS").innerHTML = "Donuts every " + donuts2/1000 + " seconds: " + donutsPS;
+})
+setInterval(function renderDonutsPC() {
+document.getElementById("donutsPC").innerHTML = "Donuts per click: " + donutsPC;
+})
+setInterval(function renderPrestigeNum() {
+document.getElementById("PrestigeNum").innerHTML = "Prestige: " + PrestigeNum;
+})
+
+
+function save() {
+	localStorage.setItem("donuts", donuts);
+	localStorage.setItem("donutsPS", donutsPS);
+	localStorage.setItem("donutsPC", donutsPC);
+	localStorage.setItem("PrestigeNum", PrestigeNum);
+	localStorage.setItem("donuts2", donuts2);
+}
+
+function load() {
+	donutsPS = localStorage.getItem("donutsPS");
+	donutsPS = parseInt(donutsPS);
+	donutsPC = localStorage.getItem("donutsPC");
+	donutsPC = parseInt(donutsPC);
+	donuts = localStorage.getItem("donuts");
+	donuts = parseInt(donuts);
+	donuts2 = localStorage.getItem("donuts2");
+	donuts2 = parseInt(donuts2);
+	PrestigeNum = localStorage.getItem("PrestigeNum");
+	PrestigeNum = parseInt(PrestigeNum);
+	if (isNaN(PrestigeNum)) {
+		PrestigeNum = 0;
+	
+	}
+	if (isNaN(donutsPS)) {
+		donutsPS = 0;
+	
+	}
+	if (isNaN(donutsPC)) {
+		donutsPC = 1;
+	
+	}
+	if (isNaN(donuts)) {
+		donuts = 0;
+	
+	}
+	if (isNaN(donuts2)) {
+		donuts2 = 10000;
+	
+	}
+
+
+
+}
+
+
+function gainDonutPS() {
+if(donuts >= 50){
+donutsPS += 1;
+donuts -= 50;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+
+function gainDonutPC() {
+if(donuts >= 200){
+donutsPC += 1;
+donuts -= 200;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+
+function gainDonutPS2() {
+if(donuts >= 350){
+donutsPS += 10;
+donuts -= 350;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+
+function gainDonutPC2() {
+if(donuts >= 1000){
+donutsPC += 8;
+donuts -= 1000;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+setInterval(function donutPS(){
+donuts += donutsPS;
+}, donuts2)
+
+function gainDonutPS3() {
+if(donuts >= 2750){
+donutsPS += 100;
+donuts -= 2750;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+
+function gainDonutPC3() {
+if(donuts >= 4000){
+donutsPC += 30;
+donuts -= 4000;
+}
+else{
+alert("You don't have enough money!");
+}
+}
+
+function prestige() {
+	if(PrestigeNum >= 9) {
+		alert("You can't prestige more than 9 times!\nThis is to prevent infinite, timeless baking!")
+	}
+	else if(donuts >= 10000){
+		PrestigeNum += 1;
+		donuts = 0;
+		donutsPS = 0;
+		donutsPC = 1;
+		donuts2 -= 1000;
+	}
+	else{
+		alert("You don't have enough money!");
+	}
+}
+
+</script>
+<h2>Upgrades:</h2>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPS()">Hire another baker
+<br>
+<h5>Each baker gets you 1 <br>donut every 10 seconds</h5>
+<h3>Baker cost: 50$</h3></button>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPC()">Buy another stove
+<br>
+<h5>Each new stove gets you 1 <br>more donut per click</h5>
+<h3>Stove cost: 200$</h3></button>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPS2()">Hire a donut expert
+<br>
+<h5>Each expert gets you 10 <br>donuts every 10 seconds</h5>
+<h3>Expert cost: 350$</h3></button>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPC2()">Buy donut frosting
+<br>
+<h5>Each frosted donut gets you 8 <br>more donuts per click</h5>
+<h3>Frosting cost: 1000$</h3></button>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPS3()">Buy a donut factory
+<br>
+<h5>Each new factory gets you 100 <br> donuts every 10 seconds</h5>
+<h3>Factory cost: 2750$</h3></button>
+<br>
+<br>
+<button button type="button" onClick="gainDonutPC3()">Buy donut sprinkles
+<br>
+<h5>Each sprinkled donut gets you 30 <br>more donuts per click</h5>
+<h3>Sprinkles cost: 4000$</h3></button>
+
+<br>
+<br>
+<button button type="button" onClick="prestige()">Become a donut god
+<br>
+<h5>Prestige to become the <br>ultimate donut god! <br>All donut workers <br>take %10 less time!</h5>
+<h3>Prestige base cost: 10000$</h3><br><h5>(If you have $10000 then it takes<br> away all your money and upgrades)</h5></button>
+</body>
+</html>
